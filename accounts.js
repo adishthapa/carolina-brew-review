@@ -29,6 +29,10 @@ $("#signup-submit").click(function(event) {
         password
     });
 
+    $("#name-input").val("");
+    $("#email-input").val("");
+    $("#password-input").val("");
+
 });
 
 // Function for logging in
