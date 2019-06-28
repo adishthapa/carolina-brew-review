@@ -39,7 +39,11 @@ $.ajax({
     beerName = response.records[i].fields.name;
     beerStyle = response.records[i].fields.style_name;
     beerCateg = response.records[i].fields.cat_name;
-    beerABV = response.records[i].fields.abv;
+    if (response.records[i].fields.abv === 0) {
+      beerABV = "";
+    } else {
+      beerABV = response.records[i].fields.abv;
+    }
     beerDescr = response.records[i].fields.descript;
     longitude = response.records[i].geometry.coordinates[0];
     latitude = response.records[i].geometry.coordinates[1];
@@ -61,7 +65,8 @@ $.ajax({
             latitude
           },
           address: address,
-          website: website
+          website: website,
+          breweryName: brewery
         }
       };
       beerObj[city] = cityInfo;
@@ -80,7 +85,8 @@ $.ajax({
           latitude
         },
         address: address,
-        website: website
+        website: website,
+        breweryName: brewery
       };
 
       beerObj[city][brewery] = breweryInfo;
@@ -104,19 +110,28 @@ $.ajax({
   //   for (var key in breweryInfo) {
   //     console.log(breweryInfo[key].length);
   //   }
-  //test(beerObj.Asheville["Highland Brewing Company"]);
+  test(beerObj["Chapel Hill"]["Top of the Hill Restaurant and Brewery"]);
 });
 
 // Change "breweryName" to whatever the link or button id for the brewery is (under brewery list under city)
 //$(".breweryName").on("click",
 function test(returned) {
-  console.log(returned);
-  var brewHeaderDiv = $("<div>")
-    .attr("id", "brewHeader")
-    .text(returned);
-  var brewAddressDiv = $("<div>").attr("id", "brewAddress");
-  var brewLinkDiv = $("<div>").attr("id", "brewLink");
+  console.log(returned.breweryName);
+  var brewNameDiv = $("<div>")
+    .attr("id", "breweryName")
+    .text(returned.breweryName);
+  var brewAddressDiv = $("<div>")
+    .attr("id", "breweryAddress")
+    .text(returned.address);
+  var breweryLink = $("<a>")
+    .attr("href", returned.website)
+    .attr("target", "_blank")
+    .text(returned.website);
+  var brewLinkDiv = $("<div>")
+    .attr("id", "breweryLink")
+    .append(breweryLink);
 
+  $("header").append(brewNameDiv, brewAddressDiv, brewLinkDiv);
   // ? How to access length of beer list ?
   var beerList = returned.beers;
   for (i = 0; i < beerList.length; i++) {
