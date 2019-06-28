@@ -73,21 +73,29 @@ $.ajax({
             var newPanelTitle = $("<div>").addClass("panel-title")
             var newCity = $("<a>").attr("data-toggle", "collapse").attr("href", "#")
             var cityName = citiesList[i]
+
             newCity.text(cityName);
+            newPanelTitle.append(newCity);
+            newPanelHeading.append(newPanelTitle);
+            newPanel.append(newPanelHeading);
 
             var breweriesList = Object.keys(beerObj[cityName]).sort();
 
             for (var j = 0; j < breweriesList.length; j++) {
-                newBrewery = breweriesList[j];
-                // var newBrewery =
+                var newPanelBody = $("<div>").addClass("panel-body");
+                var newBrewery = $("<li>")
+                breweryName = breweriesList[j];
+                newBrewery.text(breweryName);
+                newPanelBody.append(newBrewery);
+                newPanel.append(newPanelBody);
+                console.log(breweriesList[j]);
             }
-            console.log(breweriesList);
 
-            newPanelTitle.append(newCity);
-            newPanelHeading.append(newPanelTitle);
-            newPanel.append(newPanelHeading);
             $("#addHere").append(newPanel);
+
         }
+
+        console.log(beerObj);
 
     }
 
