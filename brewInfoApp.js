@@ -46,22 +46,22 @@ $.ajax({
     address = response.records[i].fields.address1;
     website = response.records[i].fields.website;
     if (!beerObj[city]) {
+      beerInfo = {
+        name: beerName,
+        style: beerStyle,
+        category: beerCateg,
+        ABV: beerABV,
+        description: beerDescr
+      };
       cityInfo = {
         [brewery]: {
-          beers: [beerName],
+          beers: [beerInfo],
           location: {
             longitude,
             latitude
           },
           address: address,
-          website: website,
-          [beerName]: {
-            name: beerName,
-            style: beerStyle,
-            category: beerCateg,
-            ABV: beerABV,
-            description: beerDescr
-          }
+          website: website
         }
       };
       beerObj[city] = cityInfo;
@@ -74,7 +74,7 @@ $.ajax({
         description: beerDescr
       };
       breweryInfo = {
-        beers: [beerName],
+        beers: [beerInfo],
         location: {
           longitude,
           latitude
@@ -84,9 +84,7 @@ $.ajax({
       };
 
       beerObj[city][brewery] = breweryInfo;
-      breweryInfo[beerName] = beerInfo;
-    } else if (beerObj[city][brewery]["beers"].indexOf(beerName) === -1) {
-      beerObj[city][brewery]["beers"].push(beerName);
+    } else if (!beerObj[city][brewery].beers.name) {
       beerInfo = {
         name: beerName,
         style: beerStyle,
@@ -94,7 +92,7 @@ $.ajax({
         ABV: beerABV,
         description: beerDescr
       };
-      beerObj[city][brewery][beerName] = beerInfo;
+      beerObj[city][brewery].beers.push(beerInfo);
     }
   }
 
@@ -106,7 +104,7 @@ $.ajax({
   //   for (var key in breweryInfo) {
   //     console.log(breweryInfo[key].length);
   //   }
-  test(beerObj.Asheville["Highland Brewing Company"]);
+  //test(beerObj.Asheville["Highland Brewing Company"]);
 });
 
 // Change "breweryName" to whatever the link or button id for the brewery is (under brewery list under city)
