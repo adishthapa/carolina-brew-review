@@ -12,6 +12,20 @@
 
 // var database = firebase.database();
 var beerObj = {};
+var city,
+  brewery,
+  beerName,
+  beerStyle,
+  beerCateg,
+  beerABV,
+  beerDescr,
+  longitude,
+  latitude,
+  address,
+  website,
+  cityInfo,
+  beerInfo,
+  breweryInfo;
 var queryURL =
   "https://data.opendatasoft.com/api/records/1.0/search/?dataset=open-beer-database%40public-us&q=North+Carolina&rows=100&facet=city&facet=name_breweries";
 
@@ -20,88 +34,105 @@ $.ajax({
   method: "GET"
 }).then(function(response) {
   for (var i = 0; i < response.records.length; i++) {
-    var city = response.records[i].fields.city;
-    var brewery = response.records[i].fields.name_breweries;
-    var beerName = response.records[i].fields.name;
-    var beerStyle = response.records[i].fields.style_name;
-    var beerCateg = response.records[i].fields.cat_name;
-    var beerABV = response.records[i].fields.abv;
-    var beerDescr = response.records[i].fields.descript;
-    var longitude = response.records[i].geometry.coordinates[0];
-    var latitude = response.records[i].geometry.coordinates[1];
+    city = response.records[i].fields.city;
+    brewery = response.records[i].fields.name_breweries;
+    beerName = response.records[i].fields.name;
+    beerStyle = response.records[i].fields.style_name;
+    beerCateg = response.records[i].fields.cat_name;
+    beerABV = response.records[i].fields.abv;
+    beerDescr = response.records[i].fields.descript;
+    longitude = response.records[i].geometry.coordinates[0];
+    latitude = response.records[i].geometry.coordinates[1];
+    address = response.records[i].fields.address1;
+    website = response.records[i].fields.website;
     if (!beerObj[city]) {
-      var beerInfo = {
-        style: beerStyle,
-        category: beerCateg,
-        ABV: beerABV,
-        description: beerDescr
-      };
-      var breweryInfo = {
-        beers: [beerName],
-        location: {
-          longitude,
-          latitude
+      cityInfo = {
+        [brewery]: {
+          beers: [beerName],
+          location: {
+            longitude,
+            latitude
+          },
+          address: address,
+          website: website,
+          [beerName]: {
+            name: beerName,
+            style: beerStyle,
+            category: beerCateg,
+            ABV: beerABV,
+            description: beerDescr
+          }
         }
       };
-      var cityInfo = {};
-      breweryInfo[beerName] = beerInfo;
-      cityInfo[brewery] = breweryInfo;
       beerObj[city] = cityInfo;
     } else if (!beerObj[city][brewery]) {
-      var beerInfo = {
+      beerInfo = {
+        name: beerName,
         style: beerStyle,
         category: beerCateg,
         ABV: beerABV,
         description: beerDescr
       };
-      var breweryInfo = {
+      breweryInfo = {
         beers: [beerName],
         location: {
           longitude,
           latitude
-        }
+        },
+        address: address,
+        website: website
       };
 
       beerObj[city][brewery] = breweryInfo;
       breweryInfo[beerName] = beerInfo;
     } else if (beerObj[city][brewery]["beers"].indexOf(beerName) === -1) {
       beerObj[city][brewery]["beers"].push(beerName);
-      var beerInfo = {
+      beerInfo = {
+        name: beerName,
         style: beerStyle,
         category: beerCateg,
         ABV: beerABV,
         description: beerDescr
       };
       beerObj[city][brewery][beerName] = beerInfo;
-      // TRYING TO ADD INDIVIDUAL BEER INFO TO BEEROBJ
-      // beerObj[city][brewery][beerName]["style"].push(beerStyle);
-      // beerObj[city][brewery][beerName]["category"].push(beerCateg);
-      // beerObj[city][brewery][beerName]["ABV"].push(beerABV);
-      // beerObj[city][brewery][beerName]["description"].push(beerDescr);
     }
   }
 
   // Add functions here
+  //console.log(Object.keys(beerObj.Asheville["Highland Brewing Company"]));
+  //console.log(beerObj.Asheville);
+  //   var breweryInfo = beerObj.Asheville["Highland Brewing Company"];
+  //   console.log(breweryInfo.beers.length);
+  //   for (var key in breweryInfo) {
+  //     console.log(breweryInfo[key].length);
+  //   }
+  test(beerObj.Asheville["Highland Brewing Company"]);
 });
 
 // Change "breweryName" to whatever the link or button id for the brewery is (under brewery list under city)
-$("breweryNameId").on("click", function() {
-  var brewHeaderDiv = $("<div>").attr("id", "brewHeader");
+//$(".breweryName").on("click",
+function test(returned) {
+  console.log(returned);
+  var brewHeaderDiv = $("<div>")
+    .attr("id", "brewHeader")
+    .text(returned);
   var brewAddressDiv = $("<div>").attr("id", "brewAddress");
   var brewLinkDiv = $("<div>").attr("id", "brewLink");
-  var newRow = $("<tr>");
 
   // ? How to access length of beer list ?
-  for (i = 0; i < "thisbrewery.beers.length"; i++) {
+  var beerList = returned.beers;
+  for (i = 0; i < beerList.length; i++) {
     // beerObj needs to be built with each beer's info to complete this section
-    var newName = $("<td>").text("name");
-    var newStyle = $("<td>").text("style");
-    var newCateg = $("<td>").text("category");
-    var newAlcPerc = $("<td>").text("alc %");
-    var newDescr = $("<td>").text("Description (if it exists)");
+    var newRow = $("<tr>");
+    var newName = $("<td>").text(beerList[i].name);
+    var newStyle = $("<td>").text(beerList[i].style);
+    var newCateg = $("<td>").text(beerList[i].category);
+    var newAlcPerc = $("<td>").text(beerList[i].ABV);
+    var newDescr = $("<td>").text(beerList[i].description);
     newRow.append(newName, newStyle, newCateg, newAlcPerc, newDescr);
     $("tbody").append(newRow);
   }
-});
+}
+//);
 
 console.log(beerObj);
