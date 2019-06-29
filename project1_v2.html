@@ -12,30 +12,13 @@
       crossorigin="anonymous"
     />
 
-    <!-- favicon -->
-    <link rel="icon" type="image/x-icon" href="images/beermug.jpg" />
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    
+    <!-- CDN for Ajax -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 
-    <!-- Latest compiled and minified JavaScript -->
-    <script
-      src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
-      integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
-      crossorigin="anonymous"
-    ></script>
-
-    <!--  jQuery Javascript library and the jQuery cookie plugin -->
-
-    <script src="jquery-3.4.1.min.js"></script>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
-
-    <!--    Fonts for Typography-->
-    <link
-      href="https://fonts.googleapis.com/css?family=Abel|Cinzel+Decorative|Roboto+Condensed|Yellowtail"
-      rel="stylesheet"
-    />
-    <!--CSS link-->
-    <link rel="stylesheet" type="text/css" href="style.css" />
-    <!-- CSS link to age verification  -->
-    <link href="css/age-verification.css" rel="stylesheet" />
   </head>
 
   <body>
@@ -56,6 +39,12 @@
           </button>
           <a class="navbar-brand " href="#">Carolina Brew Review</a>
         </div>
+
+        <style type="text/css">
+          ul {
+          list-style-type: none;
+          }
+        </style>
 
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
@@ -122,22 +111,16 @@
     </div>
 
     <!--List NC Cities Along With Breweries In Those Cities hrefs to provide links-->
-    <div class="container">
-      <div class="row row-grid">
-        <div class="panel-group">
-          <div class="panel col-md-3">
-            <div class="panel-heading">
-              <h4 class="panel-title">
-                <a data-toggle="collapse" href="#collapse1">Aberdeen</a>
-              </h4>
-            </div>
-            
-            </div>
-          </div>
-        </div>
+    <div class="container content-row">
+      <div class="row" id="cities-breweries-list">
+
       </div>
     </div>
+
   </body>
 
   <footer>A Team Six Pack Production~~UNC Coding Boot Camp 2019</footer>
+
+
+  <script src="project1.js"></script>
 </html>
