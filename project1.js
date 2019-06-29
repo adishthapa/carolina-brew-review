@@ -85,8 +85,8 @@ $.ajax({
 
             for (var j = 0; j < breweriesList.length; j++) {
                 // var newCardBody = $("<div>");
-                var newBrewery = $("<p>").addClass("card-text pb-2")
                 breweryName = breweriesList[j];
+                var newBrewery = $("<p>").addClass("card-text pb-2 brewery-link").val(breweryName).attr("id", cityName);
                 newBrewery.text(breweryName);
                 // newCardBody.append(newBrewery);
                 newCardBody.append(newBrewery);
