@@ -27,7 +27,7 @@ var city,
   beerInfo,
   breweryInfo;
 var queryURL =
-  "https://data.opendatasoft.com/api/records/1.0/search/?dataset=open-beer-database%40public-us&q=North+Carolina&rows=100&facet=city&facet=name_breweries";
+  "https://data.opendatasoft.com/api/records/1.0/search/?dataset=open-beer-database%40public-us&rows=100&sort=name&facet=style_name&facet=cat_name&facet=name_breweries&facet=country&refine.country=United+States&refine.state=North+Carolina";
 
 $.ajax({
   url: queryURL,
@@ -102,50 +102,37 @@ $.ajax({
     }
   }
 
-  // Add functions here
-  //console.log(Object.keys(beerObj.Asheville["Highland Brewing Company"]));
-  //console.log(beerObj.Asheville);
-  //   var breweryInfo = beerObj.Asheville["Highland Brewing Company"];
-  //   console.log(breweryInfo.beers.length);
-  //   for (var key in breweryInfo) {
-  //     console.log(breweryInfo[key].length);
-  //   }
-  test(beerObj["Chapel Hill"]["Top of the Hill Restaurant and Brewery"]);
+  $(".brewery-link").on("click", function() {
+    returned = beerObj[$(this.attr("id"))][this.val()];
+    console.log(returned.breweryName);
+    var brewNameDiv = $("<div>")
+      .attr("id", "breweryName")
+      .text(returned.breweryName);
+    var brewAddressDiv = $("<div>")
+      .attr("id", "breweryAddress")
+      .text(returned.address);
+    var breweryLink = $("<a>")
+      .attr("href", returned.website)
+      .attr("target", "_blank")
+      .text(returned.website);
+    var brewLinkDiv = $("<div>")
+      .attr("id", "breweryLink")
+      .append(breweryLink);
+
+    $("header").append(brewNameDiv, brewAddressDiv, brewLinkDiv);
+
+    var beerList = returned.beers;
+    for (i = 0; i < beerList.length; i++) {
+      var newRow = $("<tr>");
+      var newName = $("<td>").text(beerList[i].name);
+      var newStyle = $("<td>").text(beerList[i].style);
+      var newCateg = $("<td>").text(beerList[i].category);
+      var newAlcPerc = $("<td>").text(beerList[i].ABV);
+      var newDescr = $("<td>").text(beerList[i].description);
+      newRow.append(newName, newStyle, newCateg, newAlcPerc, newDescr);
+      $("tbody").append(newRow);
+    }
+  });
 });
-
-// Change "breweryName" to whatever the link or button id for the brewery is (under brewery list under city)
-//$(".breweryName").on("click",
-function test(returned) {
-  console.log(returned.breweryName);
-  var brewNameDiv = $("<div>")
-    .attr("id", "breweryName")
-    .text(returned.breweryName);
-  var brewAddressDiv = $("<div>")
-    .attr("id", "breweryAddress")
-    .text(returned.address);
-  var breweryLink = $("<a>")
-    .attr("href", returned.website)
-    .attr("target", "_blank")
-    .text(returned.website);
-  var brewLinkDiv = $("<div>")
-    .attr("id", "breweryLink")
-    .append(breweryLink);
-
-  $("header").append(brewNameDiv, brewAddressDiv, brewLinkDiv);
-  // ? How to access length of beer list ?
-  var beerList = returned.beers;
-  for (i = 0; i < beerList.length; i++) {
-    // beerObj needs to be built with each beer's info to complete this section
-    var newRow = $("<tr>");
-    var newName = $("<td>").text(beerList[i].name);
-    var newStyle = $("<td>").text(beerList[i].style);
-    var newCateg = $("<td>").text(beerList[i].category);
-    var newAlcPerc = $("<td>").text(beerList[i].ABV);
-    var newDescr = $("<td>").text(beerList[i].description);
-    newRow.append(newName, newStyle, newCateg, newAlcPerc, newDescr);
-    $("tbody").append(newRow);
-  }
-}
-//);
 
 console.log(beerObj);
