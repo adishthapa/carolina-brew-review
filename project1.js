@@ -68,30 +68,32 @@ $.ajax({
     function fillBreweries(beerObj) {
         var citiesList = Object.keys(beerObj).sort();
         for (var i = 0; i < citiesList.length; i++) {
-            var newPanel = $("<div>").addClass("panel col-md-3")
-            var newPanelHeading = $("<div>").addClass("panel-heading")
-            var newPanelTitle = $("<div>").addClass("panel-title")
-            var newCity = $("<a>").attr("data-toggle", "collapse").attr("href", "#")
+            var newCol = $("<div>").addClass("col-sm-12 col-md-4 mb-4")
+            var newCard = $("<div>").addClass("card h-100 border-0");
+            var newCardBody = $("<div>").addClass("card-body")
+            
             var cityName = citiesList[i]
 
+            var newCity = $("<h4>").addClass("card-title text-center p-2 ")
+
             newCity.text(cityName);
-            newPanelTitle.append(newCity);
-            newPanelHeading.append(newPanelTitle);
-            newPanel.append(newPanelHeading);
+            newCardBody.append(newCity);
+            newCard.append(newCardBody);
+            newCol.append(newCard);
 
             var breweriesList = Object.keys(beerObj[cityName]).sort();
 
             for (var j = 0; j < breweriesList.length; j++) {
-                var newPanelBody = $("<div>").addClass("panel-body");
-                var newBrewery = $("<li>")
+                // var newCardBody = $("<div>");
+                var newBrewery = $("<p>").addClass("card-text pb-2")
                 breweryName = breweriesList[j];
                 newBrewery.text(breweryName);
-                newPanelBody.append(newBrewery);
-                newPanel.append(newPanelBody);
+                // newCardBody.append(newBrewery);
+                newCardBody.append(newBrewery);
                 console.log(breweriesList[j]);
             }
 
-            $("#addHere").append(newPanel);
+            $("#cities-breweries-list").append(newCol);
 
         }
 
