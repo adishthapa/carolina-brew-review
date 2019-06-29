@@ -103,7 +103,7 @@ $.ajax({
   }
 
   $(".brewery-link").on("click", function() {
-    returned = beerObj[$(this.attr("id"))][this.val()];
+    returned = beerObj[$(this).attr("id")][$(this).val()];
     console.log(returned.breweryName);
     var brewNameDiv = $("<div>")
       .attr("id", "breweryName")
@@ -132,6 +132,11 @@ $.ajax({
       newRow.append(newName, newStyle, newCateg, newAlcPerc, newDescr);
       $("tbody").append(newRow);
     }
+  });
+
+  $(".modal-close").on("click", function() {
+    $("#beerInfoHeader").empty();
+    $("#beerInfoBody").empty();
   });
 });
 

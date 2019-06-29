@@ -5,33 +5,64 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <title>Document</title>
-    <link
-      rel="stylesheet"
-      href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-      integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
-      crossorigin="anonymous"
-    />
+    
+    <!-- Compiled and minified JavaScript -->
+    <!--  -->
+    <!-- linking to materialize css -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css" />
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+    
   </head>
   <body>
-    <header></header>
+    
     <div id="container">
-      <div id="ratingDiv"></div>
-      <div><h1>BEERS</h1></div>
-      <table class="table">
-        <thead>
-          <tr>
-            <th scope="col">Name</th>
-            <th scope="col">Style</th>
-            <th scope="col">Category</th>
-            <th scope="col">Alc %</th>
-            <th scope="col">Description</th>
-          </tr>
-        </thead>
-        <tbody></tbody>
-      </table>
-      <div id="mapDiv"></div>
+      
+      <h3>Breweries</h3>
+     <!-- Modal Triggers -->
+     <div id="breweryDiv">
+     
     </div>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+     <!-- Modal Structure -->
+     <div id="modal-fixed-footer" class="modal modal-fixed-footer">
+       <div class="modal-content">
+            <header id="beerInfoHeader"></header>
+            <div id="ratingDiv"></div>
+         <table class="table">
+                <div><h4>BEERS</h4></div>    
+            <thead>
+                  <tr>
+                    <th scope="col">Name</th>
+                    <th scope="col">Style</th>
+                    <th scope="col">Category</th>
+                    <th scope="col">Alc %</th>
+                    <th scope="col">Description</th>
+                  </tr>
+                </thead>
+                <tbody id="beerInfoBody"></tbody>
+              </table>
+              <br>
+              <div id="mapDiv"></div>
+       </div>
+       <div class="modal-footer">
+         <a href="#!" class="modal-action modal-close btn teal lighten-1"
+           >Close</a
+         >
+       </div>
+     </div>
+   </div>
+      
+      
+      
+    </div>
+    <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+   <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script> -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    
+    <script>
+            $(document).ready(function() {
+              $(".modal").modal();
+            });
+          </script>
     <script src="brewInfoApp.js"></script>
   </body>
 </html>
