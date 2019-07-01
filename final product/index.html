@@ -1,107 +1,101 @@
 <!DOCTYPE html>
+<html lang="en">
+<head>
 
-  <html>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 
-    <head>
-        <!-- Let browser know website is optimized for mobile -->
-        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <!-- Import Google Icon Font -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
-        <!-- Import Google Icon Font -->
-        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-        <!-- Import materialize.css -->
-        <link type="text/css" rel="stylesheet" href="css/materialize.min.css"  media="screen,projection"/>
+    <!-- Import materialize.css -->
+    <link type="text/css" rel="stylesheet" href="css/materialize.min.css"  media="screen,projection"/>
 
-        <!-- Fonts for Typography -->
-        <link href="https://fonts.googleapis.com/css?family=Abel|Cinzel+Decorative|Roboto+Condensed|Yellowtail" rel="stylesheet"/>
+    <!-- Fonts for Typography -->
+    <link href="https://fonts.googleapis.com/css?family=Abel|Cinzel+Decorative|Roboto+Condensed|Yellowtail" rel="stylesheet"/>
 
-        <!-- Custom CSS -->
-        <link rel="stylesheet" type="text/css" href="css/style.css">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" type="text/css" href="css/style.css">
 
-    </head>
+    <!-- Title -->
+    <title>Document</title>
 
-    <body>
+</head>
+<body>
 
-        <div id="initial-screen">
-            <nav>
-                <div class="nav-wrapper">
-                    <a href="#" class="brand-logo">Carolina Brew Review</a>
-                    <ul class="right hide-on-med-and-down">
-                        <li><a href="#" class="active">Home</a></li>
-                        <li><a href="#">Signup</a></li>
-                        <li><a href="#">Login</a></li>
-                    </ul>
-                </div>
-            </nav>
-
-            <div class="col-12 center-align" id="title">
-                <h1>Carolina Brew Review</h1>
-                <h3>Discover your local breweries</h3>
+    <div id="initial-screen">
+        <nav>
+            <div class="nav-wrapper">
+                <a href="#" class="brand-logo">Carolina Brew Review</a>
+                <ul class="right hide-on-med-and-down">
+                    <li><a href="#" class="active">Home</a></li>
+                    <li><a href="#">Signup</a></li>
+                    <li><a href="#">Login</a></li>
+                </ul>
             </div>
+        </nav>
+
+        <div class="col-12 center-align" id="title">
+            <h1>Carolina Brew Review</h1>
+            <h3>Discover your local breweries</h3>
         </div>
 
-        <!--List NC Cities Along With Breweries In Those Cities hrefs to provide links-->
-        <div class="container h-100" id="filler-screen">
-            <div class="row">
-                <div class="col">
-                    <h3 class="my-4">
-                        North Carolina Breweries:
-                    </h3>
-                </div>
-            </div>
-            
-            <div class="row" id="cities-breweries-list">
-        
-            </div>
+    </div>
     
+    <!--List NC Cities Along With Breweries In Those Cities hrefs to provide links-->
+    <div class="container h-100" id="filler-screen">
+        <div class="row">
+            <div class="col">
+                <h3 class="my-4">
+                    North Carolina Breweries:
+                </h3>
+            </div>
+        </div>
+        
+        <div class="row" id="cities-breweries-list"></div>
+
+    </div>
+    
+    <div id="breweryDiv">
+    
+        <!-- Modal Structure -->
+        <div id="modal-fixed-footer" class="modal modal-fixed-footer">
+
+        <div class="modal-content">
+            <header id="beerInfoHeader"></header>
+            <div id="ratingDiv"></div>
+            <table class="table">
+                <div><h4>BEERS</h4></div>    
+            <thead>
+                    <tr>
+                    <th scope="col">Name</th>
+                    <th scope="col">Style</th>
+                    <th scope="col">Category</th>
+                    <th scope="col">Alc %</th>
+                    <th scope="col">Description</th>
+                    </tr>
+                </thead>
+                <tbody id="beerInfoBody"></tbody>
+                </table>
+                <br>
+                <div id="mapDiv"></div>
         </div>
 
-        <div id="breweryDiv">
-     
-            </div>
-             <!-- Modal Structure -->
-             <div id="modal-fixed-footer" class="modal modal-fixed-footer">
-               <div class="modal-content">
-                    <header id="beerInfoHeader"></header>
-                    <div id="ratingDiv"></div>
-                 <table class="table">
-                        <div><h4>BEERS</h4></div>    
-                    <thead>
-                          <tr>
-                            <th scope="col">Name</th>
-                            <th scope="col">Style</th>
-                            <th scope="col">Category</th>
-                            <th scope="col">Alc %</th>
-                            <th scope="col">Description</th>
-                          </tr>
-                        </thead>
-                        <tbody id="beerInfoBody"></tbody>
-                      </table>
-                      <br>
-                      <div id="mapDiv"></div>
-               </div>
-               <div class="modal-footer">
-                 <a href="#!" class="modal-action modal-close btn teal lighten-1"
-                   >Close</a
-                 >
-               </div>
-             </div>
-        
-        <!-- JavaScript at end of body for optimized loading -->
-        <script type="text/javascript" src="js/materialize.min.js"></script>
+        <div class="modal-footer">
+            <a href="#!" class="modal-action modal-close btn teal lighten-1">Close</a>
+        </div>
 
-        <!-- CDN for JQuery -->
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
-
-        <script>
-
+    </div>
             
+    <!-- JavaScript at end of body for optimized loading -->
+    <script type="text/javascript" src="js/materialize.min.js"></script>
 
-        </script>
+    <!-- CDN for JQuery -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 
-        <script src="js/app.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
 
-    </body>
-
-  </html>
+    <script src="js/app.js"></script>
+    
+</body>
+</html>
