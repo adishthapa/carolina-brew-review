@@ -11,11 +11,11 @@
         <!-- Import materialize.css -->
         <link type="text/css" rel="stylesheet" href="css/materialize.min.css"  media="screen,projection"/>
 
-      <!-- Fonts for Typography -->
-      <link href="https://fonts.googleapis.com/css?family=Abel|Cinzel+Decorative|Roboto+Condensed|Yellowtail" rel="stylesheet"/>
+        <!-- Fonts for Typography -->
+        <link href="https://fonts.googleapis.com/css?family=Abel|Cinzel+Decorative|Roboto+Condensed|Yellowtail" rel="stylesheet"/>
 
-      <!-- Custom CSS -->
-      <link rel="stylesheet" type="text/css" href="project.css">
+        <!-- Custom CSS -->
+        <link rel="stylesheet" type="text/css" href="css/style.css">
 
     </head>
 
@@ -54,19 +54,53 @@
             </div>
     
         </div>
+
+        <div id="breweryDiv">
+     
+            </div>
+             <!-- Modal Structure -->
+             <div id="modal-fixed-footer" class="modal modal-fixed-footer">
+               <div class="modal-content">
+                    <header id="beerInfoHeader"></header>
+                    <div id="ratingDiv"></div>
+                 <table class="table">
+                        <div><h4>BEERS</h4></div>    
+                    <thead>
+                          <tr>
+                            <th scope="col">Name</th>
+                            <th scope="col">Style</th>
+                            <th scope="col">Category</th>
+                            <th scope="col">Alc %</th>
+                            <th scope="col">Description</th>
+                          </tr>
+                        </thead>
+                        <tbody id="beerInfoBody"></tbody>
+                      </table>
+                      <br>
+                      <div id="mapDiv"></div>
+               </div>
+               <div class="modal-footer">
+                 <a href="#!" class="modal-action modal-close btn teal lighten-1"
+                   >Close</a
+                 >
+               </div>
+             </div>
         
-
-
-        
-
-
         <!-- JavaScript at end of body for optimized loading -->
         <script type="text/javascript" src="js/materialize.min.js"></script>
 
         <!-- CDN for JQuery -->
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 
-        <script src="app.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+
+        <script>
+
+            
+
+        </script>
+
+        <script src="js/app.js"></script>
 
     </body>
 

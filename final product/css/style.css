@@ -6,7 +6,7 @@ body {
 }
 
 body {
-    background-image: url("image.jpg");
+    background-image: url("../images/image.jpg");
     background-color: #cccccc;
     background-position: center;
     background-repeat: no-repeat;
@@ -57,7 +57,7 @@ nav li a:hover {
 
 h4 {
     color: white;
-    background-image: url("wood.jpg");
+    background-image: url("../images/wood.jpg");
     text-transform: uppercase;
     text-align: center;
     font-weight: bolder;
