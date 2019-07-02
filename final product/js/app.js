@@ -21,9 +21,32 @@ $(document).ready(function(){
 
     var beerObj = {};
 
-    var loginStatus;
-    var user;
-    var favoriteBreweries = [];
+    var loginStatus = JSON.parse(localStorage.getItem("loginStatus"));
+    var user = JSON.parse(localStorage.getItem("user"));
+    var favoriteBreweries = JSON.parse(localStorage.getItem("favoriteBreweries"));
+
+    function reset() {
+
+        if (loginStatus) {
+
+            $(".initial-log-in").hide();
+            $("#home-buttons").append("<li><a class='initial-log-in href='#' id='signout-submit'>Signout</a></li>");
+
+        } else {
+
+        }
+
+    }
+
+    reset();
+
+    $(document).on("click", "#signout-submit", function() {
+
+        localStorage.clear();
+        window.location.reload();
+
+    });
+
 
     // Function for signing up
     $("#signup-submit").click(function(event) {
@@ -32,16 +55,25 @@ $(document).ready(function(){
         var email = $("#signup-email-input").val().trim();
         var password = $("#signup-password-input").val().trim();
 
-        users.push({
+        var newUserObj = users.push({
             name,
             email,
             password,
             favoriteBreweries
         });
 
-        $("#signup-name-input").val("");
-        $("#signup-email-input").val("");
-        $("#signup-password-input").val("");
+        user = newUserObj.path.pieces_[1];
+
+        $(".initial-log-in").hide();
+        $("#home-buttons").append("<li><a class='initial-log-in href='#' id='signout-submit'>Signout</a></li>");
+        $("#modal-login").modal("close");
+
+        localStorage.setItem("loginStatus", JSON.stringify(true));
+        localStorage.setItem("user", JSON.stringify(user));
+        var emptyList = [];
+        localStorage.setItem("favoriteBreweries", JSON.stringify(emptyList));
+
+        window.location.reload();
 
     });
 
@@ -62,17 +94,26 @@ $(document).ready(function(){
 
                     if (snapshot.val().favoriteBreweries) {
                         favoriteBreweries = snapshot.val().favoriteBreweries;
+                        localStorage.setItem("favoriteBreweries", JSON.stringify(favoriteBreweries));
+                    } else {
+                        var emptyList = [];
+                        localStorage.setItem("favoriteBreweries", JSON.stringify(emptyList));
                     }
                     $(".initial-log-in").hide();
-                    $("#home-buttons").append("<li><a class='initial-log-in href='#'>Signout</a></li>");
+                    $("#home-buttons").append("<li><a class='initial-log-in href='#' id='signout-submit'>Signout</a></li>");
                     $("#modal-login").modal("close");
+
+                    localStorage.setItem("loginStatus", JSON.stringify(true));
+                    localStorage.setItem("user", JSON.stringify(user));
+
+                    window.location.reload();
+
                 }
-                
             }
         });
+        
     })
 
-    // Function for checking for favorite
 
 
     function createObj(response) {
@@ -150,7 +191,7 @@ $(document).ready(function(){
     function fillBreweries(beerObj) {
         var citiesList = Object.keys(beerObj).sort();
         for (var i = 0; i < citiesList.length; i++) {
-            var newCol = $("<div>").addClass("col s12 m4")
+            var newCol = $("<div>").addClass("col m12 l6 xl4")
             var newCard = $("<div>").addClass("card");
             var newCardContent = $("<div>").addClass("card-content transparent")
             
@@ -167,10 +208,16 @@ $(document).ready(function(){
 
             for (var j = 0; j < breweriesList.length; j++) {
                 breweryName = breweriesList[j];
+                var newDiv = $("<div>").addClass("filler-breweries");
                 var newBrewery = $("<a>").addClass("modal-trigger brewery-link").val(breweryName).attr("id", cityName).attr("href", "#modal-fixed-footer");
                 newBrewery.text(breweryName);
-                newBrewery.append("<br>");
-                newCardContent.append(newBrewery);
+                if (loginStatus) {
+                    if (favoriteBreweries.indexOf(breweryName) !== -1) {
+                        newBrewery.append("&nbsp<i class='tiny material-icons favorite'>star</i>");
+                    }
+                }
+                newDiv.append(newBrewery);
+                newCardContent.append(newDiv);
             }
 
             $("#cities-breweries-list").append(newCol);
@@ -215,7 +262,6 @@ $(document).ready(function(){
             returned = beerObj[$(this).attr("id")][$(this).val()];
             currentBrewery = returned;
             var brewNameDiv = $("<h1>").attr("id", "breweryName").text(returned.breweryName);
-            console.log(favoriteBreweries);
             if (loginStatus) {
                 if(favoriteBreweries.indexOf(returned.breweryName) === -1 ) {
                     brewNameDiv.append("&nbsp&nbsp&nbsp<a class='btn-floating black'><i class='medium material-icons favorite'>star_border</i></a>");
@@ -258,6 +304,8 @@ $(document).ready(function(){
                     var brewNameDiv = $("<h1>").attr("id", "breweryName").text(currentBrewery.breweryName);
                     brewNameDiv.append("&nbsp&nbsp&nbsp<a class='btn-floating yellow'><i class='medium material-icons favorite'>star</i></a>");
                     favoriteBreweries.push(currentBrewery.breweryName);
+                    localStorage.setItem("favoriteBreweries", JSON.stringify(favoriteBreweries));
+                    $("a:contains(" + currentBrewery.breweryName + ")").append("&nbsp<i class='tiny material-icons favorite'>star</i>");
                     database.ref("/users/" + user).update( {
                         favoriteBreweries: favoriteBreweries
                     });
@@ -267,6 +315,7 @@ $(document).ready(function(){
                     var brewNameDiv = $("<h1>").attr("id", "breweryName").text(currentBrewery.breweryName);
                     brewNameDiv.append("&nbsp&nbsp&nbsp<a class='btn-floating black'><i class='medium material-icons favorite'>star_border</i></a>");
                     favoriteBreweries.splice(currentBrewery.breweryName, 1);
+                    localStorage.setItem("favoriteBreweries", JSON.stringify(favoriteBreweries));
                     database.ref("/users/" + user).update( {
                         favoriteBreweries: favoriteBreweries
                     });

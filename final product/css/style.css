@@ -55,6 +55,12 @@ nav li a:hover {
     margin: 10px;
 }
 
+.container{
+    width: 80%;
+    max-width:initial;
+}
+
+
 #filler-screen h4 {
     color: white;
     background-image: url("../images/wood.jpg");
@@ -65,14 +71,18 @@ nav li a:hover {
     font-size: 20px;
 }
 
-#filler-screen a {
-    font-size: 13px;
-    color: black;
+.filler-breweries {
+    padding: 5px;
     border-bottom: 1px solid black;
 }
 
+#filler-screen a {
+    color: black;
+    
+}
+
 #filler-screen .card-content {
-    height: 150px;
+    height: 175px;
 }
 
 #filler-screen h4 {
