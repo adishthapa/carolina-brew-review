@@ -130,3 +130,70 @@ nav li a:hover {
 .row {
     margin-bottom: 0px;
 }
+
+
+ .row .col .offset-m3 {
+    margin: 0;
+}
+
+#modal-signup .row .col.offset-m3, #modal-login .row .col.offset-m3 {
+    margin: 0;
+}
+
+#modal-signup .row .col.m6, #modal-login .row .col.offset-m3 {
+    width: 100%;
+    margin: 0 auto;
+}
+
+#modal-signup, #modal-login {
+    background-image: url("../images/beer.jpg");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+
+} 
+
+#signup-modal-footer, #login-modal-footer {
+    background: rgba(0, 0, 0, 0);
+    margin: 0 auto;
+    padding: 0;
+    text-align: center;
+    height: 0;
+}
+
+@media only screen and (min-width: 1200px) {
+    
+    #modal-signup, #modal-login {
+        width: 40%; 
+        height: 55%;
+    } 
+    
+}
+
+@media only screen and (max-width: 1200px) and (min-width:768px) {  
+    #modal-signup, #modal-login {
+        width: 50%; 
+        height: 60%;
+    } 
+}
+
+@media only screen and (max-width: 768px) {
+    #modal-signup, #modal-login {
+        width: 80%; 
+        height: 60%;
+    } 
+}
+
+
+@media only screen and (max-width: 576px) {
+
+    .modal {
+        width: 90%; 
+        height: 75%;
+    }
+
+    #modal-signup, #modal-login {
+        width: 90%; 
+        height: 60%;
+    } 
+}

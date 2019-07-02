@@ -195,7 +195,7 @@ $(document).ready(function(){
     function fillBreweries(beerObj) {
         var citiesList = Object.keys(beerObj).sort();
         for (var i = 0; i < citiesList.length; i++) {
-            var newCol = $("<div>").addClass("col m12 l6 xl4")
+            var newCol = $("<div>").addClass("col s12 m12 l6 xl4")
             var newCard = $("<div>").addClass("card");
             var newCardContent = $("<div>").addClass("card-content transparent")
             
