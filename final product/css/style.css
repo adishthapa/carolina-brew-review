@@ -109,6 +109,14 @@ nav li a:hover {
     width: 100%;  /* The width is the width of the web page */
 }
 
+#loginStatus {
+    background-color: yellow;
+    text-transform: uppercase;
+    text-align: center;
+    font-weight: bolder;
+    font-family: "Roboto Condensed", sans-serif;
+}
+
 .row {
     margin-bottom: 0px;
 }
