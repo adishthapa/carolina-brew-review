@@ -323,8 +323,12 @@ $(document).ready(function(){
                     $("#beerInfoHeader").empty();
                     var brewNameDiv = $("<h1>").attr("id", "breweryName").text(currentBrewery.breweryName);
                     brewNameDiv.append("&nbsp&nbsp&nbsp<a class='btn-floating black'><i class='medium material-icons favorite'>star_border</i></a>");
-                    favoriteBreweries.splice(currentBrewery.breweryName, 1);
+
+                    var breweryIndex = favoriteBreweries.indexOf(currentBrewery.breweryName);
+                    favoriteBreweries.splice(breweryIndex , 1);
+
                     localStorage.setItem("favoriteBreweries", JSON.stringify(favoriteBreweries));
+                    
                     database.ref("/users/" + user).update( {
                         favoriteBreweries: favoriteBreweries
                     });
