@@ -195,7 +195,7 @@ $(document).ready(function(){
     function fillBreweries(beerObj) {
         var citiesList = Object.keys(beerObj).sort();
         for (var i = 0; i < citiesList.length; i++) {
-            var newCol = $("<div>").addClass("col m12 l6 xl4")
+            var newCol = $("<div>").addClass("col s12 m12 l6 xl4")
             var newCard = $("<div>").addClass("card");
             var newCardContent = $("<div>").addClass("card-content transparent")
             
@@ -276,10 +276,15 @@ $(document).ready(function(){
                 brewNameDiv.append("&nbsp&nbsp&nbsp<a class='btn-floating black'><i class='medium material-icons favorite'>star_border</i></a>");
             }
             var brewAddressDiv = $("<h6>").attr("id", "breweryAddress").text(returned.address);
-            var breweryLink = $("<a>").attr("href", returned.website).attr("target", "_blank").text(returned.website);
-            var brewLinkDiv = $("<div>").attr("id", "breweryLink").append(breweryLink);
     
             $("#beerInfoHeader").append(brewNameDiv);
+            if (returned.website) {
+                $("#websiteTag").text("WEBSITE:");
+                var breweryLink = $("<a>").attr("href", returned.website).attr("target", "_blank").text(returned.website);
+                $("#websiteDiv").append(breweryLink);
+                $("#websiteDiv").append("<br>");
+                $("#websiteDiv").append("<br>");
+            }
             $("#addressDiv").append(brewAddressDiv);
     
             var beerList = returned.beers;
@@ -330,12 +335,17 @@ $(document).ready(function(){
                 $("#loginStatus").text("You must be logged in to add a brewery to your favorite list!");
             }
         });
-    
-        $(".modal-close").on("click", function() {
-            $("#beerInfoHeader").empty();
-            $("#beerInfoBody").empty();
-            $("#addressDiv").empty();
-            $("#loginStatus").empty();
+
+        $('#modal-fixed-footer').modal ({
+            onCloseEnd: function() { // Callback for Modal close
+                $("#beerInfoHeader").empty();
+                $("#beerName").empty();
+                $("#loginStatus").empty();
+                $("#websiteTag").empty();
+                $("#websiteDiv").empty();
+                $("#beerInfoBody").empty();
+                $("#addressDiv").empty();
+            } 
         });
 
     });
