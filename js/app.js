@@ -330,12 +330,15 @@ $(document).ready(function(){
                 $("#loginStatus").text("You must be logged in to add a brewery to your favorite list!");
             }
         });
-    
-        $(".modal-close").on("click", function() {
-            $("#beerInfoHeader").empty();
-            $("#beerInfoBody").empty();
-            $("#addressDiv").empty();
-            $("#loginStatus").empty();
+
+        $('#modal-fixed-footer').modal ({
+            onCloseEnd: function() { // Callback for Modal close
+                $("#beerInfoHeader").empty();
+                $("#beerName").empty();
+                $("#loginStatus").empty();
+                $("#beerInfoBody").empty();
+                $("#addressDiv").empty();
+            } 
         });
 
     });
