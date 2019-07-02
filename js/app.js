@@ -19,6 +19,8 @@ $(document).ready(function(){
 
     var queryURL = "https://data.opendatasoft.com/api/records/1.0/search/?dataset=open-beer-database%40public-us&rows=100&sort=name&facet=style_name&facet=cat_name&facet=name_breweries&facet=country&refine.country=United+States&refine.state=North+Carolina";
 
+    $(".modal").modal();
+    
     var beerObj = {};
 
     var loginStatus = JSON.parse(localStorage.getItem("loginStatus"));
@@ -33,6 +35,8 @@ $(document).ready(function(){
             $("#home-buttons").append("<li><a class='initial-log-in href='#' id='signout-submit'>Signout</a></li>");
 
         } else {
+
+            $("#modal-signup").modal("open");
 
         }
 
@@ -245,7 +249,7 @@ $(document).ready(function(){
   
     });
 
-    $(".modal").modal();
+    
 
     $.ajax({
         url: queryURL,
