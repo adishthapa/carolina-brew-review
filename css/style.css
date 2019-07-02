@@ -55,7 +55,13 @@ nav li a:hover {
     margin: 10px;
 }
 
-h4 {
+.container{
+    width: 80%;
+    max-width:initial;
+}
+
+
+#filler-screen h4 {
     color: white;
     background-image: url("../images/wood.jpg");
     text-transform: uppercase;
@@ -65,21 +71,62 @@ h4 {
     font-size: 20px;
 }
 
-p {
-    font-size: 13px;
+.filler-breweries {
+    padding: 5px;
     border-bottom: 1px solid black;
 }
 
 #filler-screen a {
-    font-size: 13px;
     color: black;
-    border-bottom: 1px solid black;
+    
 }
 
 #filler-screen .card-content {
-    height: 150px;
+    height: 175px;
 }
 
 #filler-screen h4 {
     margin-top: 0px;
+}
+
+.modal {
+   width: 75%; 
+   height: 75%;
+}
+
+.modal-content h1{
+    color: white;
+    padding: 20px;
+    background-color: black;
+    font-size: 3em;
+    text-transform: uppercase;
+    text-align: center;
+    font-weight: bolder;
+    font-family: "Roboto Condensed", sans-serif;
+}
+
+.modal-content h4 {
+    margin: 0px;
+}
+
+.modal-footer .btn {
+    font-size: 20px;
+}
+
+
+#mapDiv {
+    height: 400px;  /* The height is 400 pixels */
+    width: 100%;  /* The width is the width of the web page */
+}
+
+#loginStatus {
+    background-color: yellow;
+    text-transform: uppercase;
+    text-align: center;
+    font-weight: bolder;
+    font-family: "Roboto Condensed", sans-serif;
+}
+
+.row {
+    margin-bottom: 0px;
 }
