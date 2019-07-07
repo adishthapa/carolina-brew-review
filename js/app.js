@@ -1,5 +1,6 @@
 $(document).ready(function(){
 
+    // Firebase Configuration for the web application
     var firebaseConfig = {
         apiKey: "AIzaSyCrrcl0Qk0lbbLwURSemFTE499mmFSVbvM",
         authDomain: "project-01-704ce.firebaseapp.com",
@@ -9,116 +10,42 @@ $(document).ready(function(){
         messagingSenderId: "638882612611",
         appId: "1:638882612611:web:2566b2b54d0668d4"
     };
-    // Initialize Firebase
+
+    // Initializes the Firebase
     firebase.initializeApp(firebaseConfig);
 
-    // Create a variable to reference the database
+    // Creates a variable to reference the database
     var database = firebase.database();
-    // Link to Firebase Database for tracking users
+
+    // Links to the Firebase Database for tracking users
     var users = database.ref("/users");
 
+    // URL for our Open Beer Database API
     var queryURL = "https://data.opendatasoft.com/api/records/1.0/search/?dataset=open-beer-database%40public-us&rows=100&sort=name&facet=style_name&facet=cat_name&facet=name_breweries&facet=country&refine.country=United+States&refine.state=North+Carolina";
 
-    $(".modal").modal();
-    
+    // Variable that contains our custom beer object derived from the Open Beer Database API
     var beerObj = {};
 
+    // Variable that contains information for whether the User has logged in or not by referencing the local storage
     var loginStatus = JSON.parse(localStorage.getItem("loginStatus"));
+
+    // Variable that contains the database information for the User by referencing the local storage
     var user = JSON.parse(localStorage.getItem("user"));
+
+    // Variable that contains the list of favorite breweries for the User by referencing the local storage
     var favoriteBreweries = JSON.parse(localStorage.getItem("favoriteBreweries"));
 
+    // Function that sets the initial layout of the web application
     function reset() {
 
         if (loginStatus) {
-
-            $(".initial-log-in").hide();
-            $("#home-buttons").append("<li><a class='initial-log-in href='#' id='signout-submit'>Signout</a></li>");
-
+            $(".initial-links").hide();
+            $("#nav-buttons").append("<li><a href='#' id='signout-submit'>Signout</a></li>");
         } else {
-
             $("#modal-signup").modal("open");
-
         }
 
     }
-
-    reset();
-
-    $(document).on("click", "#signout-submit", function() {
-
-        localStorage.clear();
-        window.location.reload();
-
-    });
-
-
-    // Function for signing up
-    $("#signup-submit").click(function(event) {
-        event.preventDefault();
-        var name = $("#signup-name-input").val().trim();
-        var email = $("#signup-email-input").val().trim();
-        var password = $("#signup-password-input").val().trim();
-
-        var newUserObj = users.push({
-            name,
-            email,
-            password,
-            favoriteBreweries
-        });
-
-        user = newUserObj.path.pieces_[1];
-
-        $(".initial-log-in").hide();
-        $("#home-buttons").append("<li><a class='initial-log-in href='#' id='signout-submit'>Signout</a></li>");
-        $("#modal-login").modal("close");
-
-        localStorage.setItem("loginStatus", JSON.stringify(true));
-        localStorage.setItem("user", JSON.stringify(user));
-        var emptyList = [];
-        localStorage.setItem("favoriteBreweries", JSON.stringify(emptyList));
-
-        window.location.reload();
-
-    });
-
-    // Function for logging in
-    $("#login-submit").click(function(event) {
-        event.preventDefault();
-        var email = $("#login-email-input").val().trim();
-        var password = $("#login-password-input").val().trim();
-        
-
-        users.orderByChild("email").equalTo(email).on("child_added", function(snapshot) {
-            if(snapshot.key) {
-                
-                if (password === snapshot.val().password) {
-                    
-                    loginStatus = true;
-                    user = snapshot.key;
-
-                    if (snapshot.val().favoriteBreweries) {
-                        favoriteBreweries = snapshot.val().favoriteBreweries;
-                        localStorage.setItem("favoriteBreweries", JSON.stringify(favoriteBreweries));
-                    } else {
-                        var emptyList = [];
-                        localStorage.setItem("favoriteBreweries", JSON.stringify(emptyList));
-                    }
-                    $(".initial-log-in").hide();
-                    $("#home-buttons").append("<li><a class='initial-log-in href='#' id='signout-submit'>Signout</a></li>");
-                    $("#modal-login").modal("close");
-
-                    localStorage.setItem("loginStatus", JSON.stringify(true));
-                    localStorage.setItem("user", JSON.stringify(user));
-
-                    window.location.reload();
-
-                }
-            }
-        });
-        
-    })
-
-
 
     function createObj(response) {
            
@@ -238,6 +165,92 @@ $(document).ready(function(){
         // The marker, positioned at the Brewery
         var marker = new google.maps.Marker({position: breweryLoc, map: map});
     }
+
+
+
+    $(".modal").modal();
+
+    reset();
+
+    $(document).on("click", "#signout-submit", function() {
+
+        localStorage.clear();
+        window.location.reload();
+
+    });
+
+
+    // Function for signing up
+    $("#signup-submit").click(function(event) {
+        event.preventDefault();
+        var name = $("#signup-name-input").val().trim();
+        var email = $("#signup-email-input").val().trim();
+        var password = $("#signup-password-input").val().trim();
+
+        var newUserObj = users.push({
+            name,
+            email,
+            password,
+            favoriteBreweries
+        });
+
+        user = newUserObj.path.pieces_[1];
+
+        $(".initial-links").hide();
+        $("#nav-buttons").append("<li><a href='#' id='signout-submit'>Signout</a></li>");
+        $("#modal-login").modal("close");
+
+        localStorage.setItem("loginStatus", JSON.stringify(true));
+        localStorage.setItem("user", JSON.stringify(user));
+        var emptyList = [];
+        localStorage.setItem("favoriteBreweries", JSON.stringify(emptyList));
+
+        window.location.reload();
+
+    });
+
+    // Function for logging in
+    $("#login-submit").click(function(event) {
+        event.preventDefault();
+        var email = $("#login-email-input").val().trim();
+        var password = $("#login-password-input").val().trim();
+        
+
+        users.orderByChild("email").equalTo(email).on("child_added", function(snapshot) {
+            if(snapshot.key) {
+                
+                if (password === snapshot.val().password) {
+                    
+                    loginStatus = true;
+                    user = snapshot.key;
+
+                    if (snapshot.val().favoriteBreweries) {
+                        favoriteBreweries = snapshot.val().favoriteBreweries;
+                        localStorage.setItem("favoriteBreweries", JSON.stringify(favoriteBreweries));
+                    } else {
+                        var emptyList = [];
+                        localStorage.setItem("favoriteBreweries", JSON.stringify(emptyList));
+                    }
+                    $(".initial-links").hide();
+                    $("#nav-buttons").append("<li><a href='#' id='signout-submit'>Signout</a></li>");
+                    $("#modal-login").modal("close");
+
+                    localStorage.setItem("loginStatus", JSON.stringify(true));
+                    localStorage.setItem("user", JSON.stringify(user));
+
+                    window.location.reload();
+
+                }
+            }
+        });
+        
+    })
+
+
+
+    
+
+    
 
     $(window).scroll(function(){
   
