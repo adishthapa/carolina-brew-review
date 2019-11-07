@@ -1,34 +1,42 @@
-# Carolina Brew Review
+# Kooffee
 
-A Brewery tracking application that shows Breweries located throughout North Carolina and their most popular beers.
+A coffee shop application that allows the User to view the shop's menu and order items for pickup. It also allows the Owners of the Coffee shop to update the menu from within the application through an admin account.
 
 ## Application Instructions
 
-1. Click on a Brewery from the list to view its information and collection of beers
-2. Signup or Login if you would like to add a brewery to your favorites list
-3. Click on the star next to the name of the brewery on the popup modal to add it to your favorites list
-4. Click on the star again to remove it from your favorites list
-5. Your favorite breweries will have a star next to their name on the list with all the breweries
+1. Signup or Login by pressing the Account button on the NavBar
+2. Select either drink, food, or product
+3. Select the item that you would like to purchase
+4. Specify the quantity and size if its a drink and press the Add to Cart button
+5. Go to the Cart by pressing the Cart button on the NavBar to finalize your purchase
+6. If you are an admin and want to add more items to the inventory or want to delete/edit an item, go to the Admin page by pressing the Admin button on the NavBar
+7. Fill in the form at the Admin page to add more items
+8. Select Edit next to the item to edit it 
+9. Select Delete next to the item to delete it
 
 ## Built With
 
 - AJAX
+- Bideo.JS
+- Bootstrap
 - CSS3
-- Firebase Database
-- Google Maps API
+- Express
+- Express Handlebars
+- Heroku
 - HTML5
 - JavaScript
 - jQuery
-- Materialize
-- Open Beer Database API
+- MySQL Database
+- Node.JS
+- Sequelize ORM
 
 ## Team Members
 * [Julissa Giron](https://github.com/Juligi)
-* [Nick Prather](https://github.com/NickPrather11)
+* [Zuoyi Phang](https://github.com/frostyasian)
+* [Michael Simmons](https://github.com/simmonsm13)
 * [Adish Thapa](https://github.com/adishthapa)
-* [Allyson Williams](https://github.com/alleykatwill)
 
 ## Deployed Link
 
-[https://adishthapa.com/carolina-brew-review](https://adishthapa.com/carolina-brew-review)
+[https://kooffee.herokuapp.com/](https://kooffee.herokuapp.com/)
 
